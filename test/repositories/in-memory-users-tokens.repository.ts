@@ -7,4 +7,15 @@ export class InMemoryUsersTokensRepository implements UsersTokensRepository {
   async create(userToken: UserTokenEntity): Promise<void> {
     this.usersTokens.push(userToken);
   }
+
+  async findByToken(token: string): Promise<UserTokenEntity | null> {
+    const userToken = this.usersTokens.find(
+      (userToken) => userToken.token === token,
+    );
+
+    if (!userToken) {
+      return null;
+    }
+    return userToken;
+  }
 }

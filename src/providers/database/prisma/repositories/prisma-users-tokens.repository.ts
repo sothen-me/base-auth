@@ -15,4 +15,16 @@ export class PrismaUsersTokensRepository implements UsersTokensRepository {
       data: raw,
     });
   }
+
+  async findByToken(token: string): Promise<UserTokenEntity | null> {
+    const userToken = await this.prisma.userToken.findUnique({
+      where: { token },
+    });
+
+    if (!userToken) {
+      return null;
+    }
+
+    return PrismaUserTokenMapper.toDomain(userToken);
+  }
 }

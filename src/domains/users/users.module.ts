@@ -9,6 +9,7 @@ import { CreateUserTokenService } from './services/create-user-token.service';
 import { CreateUserService } from './services/create-user.service';
 import { DoSignInService } from './services/do-sign-in.service';
 import { GetUserByIdService } from './services/get-user-by-id.service';
+import { ResetUserPassowrdService } from './services/reset-user-password.service';
 
 @Module({
   imports: [HashModule, MailModule],
@@ -18,6 +19,7 @@ import { GetUserByIdService } from './services/get-user-by-id.service';
     DoSignInService,
     GetUserByIdService,
     CreateUserTokenService,
+    ResetUserPassowrdService,
     {
       provide: APP_GUARD,
       useClass: AuthGuard,

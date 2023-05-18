@@ -35,4 +35,15 @@ export class PrismaUsersRepository implements UsersRepository {
       data: raw,
     });
   }
+
+  async save(user: UserEntity): Promise<void> {
+    const raw = PrismaUserMapper.toPrisma(user);
+
+    await this.prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: raw,
+    });
+  }
 }

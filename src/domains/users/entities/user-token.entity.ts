@@ -16,7 +16,7 @@ export class UserTokenEntity {
   constructor(
     props: Replace<
       UserTokenEntityProps,
-      { createdAt?: Date; expiresAt?: Date }
+      { createdAt?: Date; expiresAt?: Date | null }
     >,
     id?: string,
     token?: string,
