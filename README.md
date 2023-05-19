@@ -6,6 +6,8 @@ Esse projeto é uma aplicação básica de autenticação que contem desde o cad
 
 * [NestJS](https://nestjs.com/)
 * [Prisma](https://www.prisma.io/)
+* [Nodemailer](https://nodemailer.com/about/)
+* [Handlebars](https://handlebarsjs.com/)
 
 ## Organização
 O projeto está organizado utilizando alguns princípios de SOLID e DDD, utilizando injeção de dependência para desacoplar as implementações de modo a diminuir as dependências com ferramentas externas e com o intuito de facilitar a mudança e/ou manutenção
@@ -70,6 +72,8 @@ npm run start:dev
 | POST | `/users`| Não | Cadastro de usuários | 
 | POST | `/auth` | Não | Login no sistema | 
 | GET | `/auth/me`| Sim | Informações do usuário logado | 
+| POST | `/auth/recover-password`| Sim | Solicitar recuperação de senha | 
+| POST | `/auth/reset-password`| Sim | Resetas a senha do usuário | 
 
 ## Contribuição
 Pull requests são bem vindas. Para mudanças maiores, por favor, abra uma issue primeiro para discutir o que você gostaria de alterar.
