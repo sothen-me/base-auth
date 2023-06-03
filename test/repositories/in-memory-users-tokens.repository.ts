@@ -18,4 +18,14 @@ export class InMemoryUsersTokensRepository implements UsersTokensRepository {
     }
     return userToken;
   }
+
+  async save(userToken: UserTokenEntity): Promise<void> {
+    const userTokenIndex = this.usersTokens.findIndex(
+      (userTokenFind) => userTokenFind.id === userToken.id,
+    );
+
+    if (userTokenIndex >= 0) {
+      this.usersTokens[userTokenIndex] = userToken;
+    }
+  }
 }

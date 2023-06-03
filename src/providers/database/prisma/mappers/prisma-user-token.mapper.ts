@@ -8,6 +8,7 @@ export class PrismaUserTokenMapper {
       token: userToken.token,
       userId: userToken.userId,
       createdAt: userToken.createdAt,
+      deletedAt: userToken.deletedAt,
       expiresAt: userToken.expiresAt,
     };
   }
@@ -17,6 +18,7 @@ export class PrismaUserTokenMapper {
       {
         userId: raw.userId,
         createdAt: raw.createdAt,
+        deletedAt: raw.deletedAt,
         expiresAt: raw.expiresAt,
       },
       raw.id,

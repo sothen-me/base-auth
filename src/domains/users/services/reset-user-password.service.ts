@@ -47,8 +47,10 @@ export class ResetUserPassowrdService {
       throw new UnauthorizedException('Token expirado');
     }
 
-    user.password = await this.hashProvider.generateHash(password);
+    userToken.delete();
+    await this.usersTokensRepository.save(userToken);
 
+    user.password = await this.hashProvider.generateHash(password);
     await this.usersRepository.save(user);
 
     return { user };

@@ -5,6 +5,7 @@ import { randomUUID } from 'node:crypto';
 interface UserTokenEntityProps {
   userId: string;
   createdAt: Date;
+  deletedAt?: Date | null;
   expiresAt: Date;
 }
 
@@ -49,6 +50,14 @@ export class UserTokenEntity {
 
   public get expiresAt(): Date {
     return this.props.expiresAt;
+  }
+
+  public delete() {
+    this.props.deletedAt = new Date();
+  }
+
+  public get deletedAt(): Date | null | undefined {
+    return this.props.deletedAt;
   }
 
   public get createdAt(): Date {

@@ -17,8 +17,11 @@ export class PrismaUsersTokensRepository implements UsersTokensRepository {
   }
 
   async findByToken(token: string): Promise<UserTokenEntity | null> {
-    const userToken = await this.prisma.userToken.findUnique({
-      where: { token },
+    const userToken = await this.prisma.userToken.findFirst({
+      where: {
+        token,
+        deletedAt: null,
+      },
     });
 
     if (!userToken) {
@@ -26,5 +29,16 @@ export class PrismaUsersTokensRepository implements UsersTokensRepository {
     }
 
     return PrismaUserTokenMapper.toDomain(userToken);
+  }
+
+  async save(userToken: UserTokenEntity): Promise<void> {
+    const raw = PrismaUserTokenMapper.toPrisma(userToken);
+
+    await this.prisma.userToken.update({
+      where: {
+        id: userToken.id,
+      },
+      data: raw,
+    });
   }
 }

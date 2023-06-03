@@ -54,6 +54,31 @@ describe('Reset User Password', () => {
     ).rejects.toThrow(NotFoundException);
   });
 
+  it('Should not be able to reset a user password with a token that already used', async () => {
+    const usersRepository = new InMemoryUsersRepository();
+    const usersTokensRepository = new InMemoryUsersTokensRepository();
+    const hashProvider = new TestHashProvider();
+
+    const userToken = makeUserToken({
+      userId: 'user-id-example',
+      deletedAt: new Date(),
+    });
+    await usersTokensRepository.create(userToken);
+
+    const resetUserPassword = new ResetUserPassowrdService(
+      usersRepository,
+      usersTokensRepository,
+      hashProvider,
+    );
+
+    expect(() =>
+      resetUserPassword.execute({
+        token: 'invalid-token',
+        password: 'new-password',
+      }),
+    ).rejects.toThrow(NotFoundException);
+  });
+
   it('Should not be able to reset a user password with userId that not exist', async () => {
     const usersRepository = new InMemoryUsersRepository();
     const usersTokensRepository = new InMemoryUsersTokensRepository();

@@ -30,5 +30,6 @@ model UserToken {
   userId String
 
   createdAt DateTime  @default(now())
+  deletedAt DateTime?
   expiresAt DateTime?
 }
